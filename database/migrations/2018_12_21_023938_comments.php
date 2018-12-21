@@ -14,7 +14,7 @@ class Comments extends Migration
     public function up()
     {
         //
-        // tabla city
+        // tabla comments
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description');
