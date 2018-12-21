@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'client');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/getCountriesList','CountryController@index');
+
+Route::get('/getDepartamentsList/{id_country}','DepartamentController@index');
+
+Route::get('/getCitiesList/{id_departament}','CityController@index');
