@@ -16,6 +16,9 @@
         <ListCity :getCitiesData="getCitiesData" ></ListCity>
       </fieldset>
       <fieldset class="form-group">
+
+        <ListComments></ListComments>
+
       </fieldset>
 
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -26,12 +29,14 @@
   import ListCountry from './CountryComponent'
   import ListDepartament from './DepartamentComponent'
   import ListCity from './CityComponent'
+  import ListComments from './CommentComponent'
 
     export default {
       components:{
         ListCountry,
         ListDepartament,
-        ListCity
+        ListCity,
+        ListComments
       },
       data :function (){
         return {

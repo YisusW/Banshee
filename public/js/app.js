@@ -47640,6 +47640,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DepartamentComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__DepartamentComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CityComponent__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CityComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__CityComponent__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CommentComponent__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CommentComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__CommentComponent__);
 //
 //
 //
@@ -47664,6 +47666,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -47673,7 +47679,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   components: {
     ListCountry: __WEBPACK_IMPORTED_MODULE_0__CountryComponent___default.a,
     ListDepartament: __WEBPACK_IMPORTED_MODULE_1__DepartamentComponent___default.a,
-    ListCity: __WEBPACK_IMPORTED_MODULE_2__CityComponent___default.a
+    ListCity: __WEBPACK_IMPORTED_MODULE_2__CityComponent___default.a,
+    ListComments: __WEBPACK_IMPORTED_MODULE_3__CommentComponent___default.a
   },
   data: function data() {
     return {
@@ -48220,7 +48227,7 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c("fieldset", { staticClass: "form-group" }),
+    _c("fieldset", { staticClass: "form-group" }, [_c("ListComments")], 1),
     _vm._v(" "),
     _c(
       "button",
@@ -48244,6 +48251,171 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(61)
+/* template */
+var __vue_template__ = __webpack_require__(62)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/CommentComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4720d6d6", Component.options)
+  } else {
+    hotAPI.reload("data-v-4720d6d6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      /* array to show list */
+      comments: [],
+      message_validate_form: "",
+      comment: ""
+    };
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.');
+    this.getComments();
+  },
+
+  methods: {
+
+    getComments: function getComments() {
+      var _this = this;
+
+      axios.get('/getCommentsList').then(function (response) {
+        if (response.data.result == 1) {
+          var states = _this.comments;
+          response.data.data.forEach(function (value) {
+            states.push(value);
+          });
+        } else {
+          _this.message_validate_form = "La lista de paises no se cargó correctamente";
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", {}, [
+    _c("label", { attrs: { for: "" } }, [_vm._v("Comentarios")]),
+    _vm._v(" "),
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.comment,
+            expression: "comment"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { name: "" },
+        on: {
+          change: function($event) {
+            var $$selectedVal = Array.prototype.filter
+              .call($event.target.options, function(o) {
+                return o.selected
+              })
+              .map(function(o) {
+                var val = "_value" in o ? o._value : o.value
+                return val
+              })
+            _vm.comment = $event.target.multiple
+              ? $$selectedVal
+              : $$selectedVal[0]
+          }
+        }
+      },
+      [
+        _c("option", { attrs: { value: "" } }, [_vm._v("Seleccione")]),
+        _vm._v(" "),
+        _vm._l(_vm.comments, function(value) {
+          return _c("option", { domProps: { value: value.id } }, [
+            _vm._v(_vm._s(value.description) + " ")
+          ])
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4720d6d6", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

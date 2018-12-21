@@ -12,9 +12,12 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+          $comments = Comments::orderBy('id')->get();
+          return response()->json(array('result'=>1,'data'=>$comments));
+        }
     }
 
     /**

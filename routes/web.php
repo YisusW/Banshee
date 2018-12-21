@@ -22,3 +22,4 @@ Route::get('/getCountriesList','CountryController@index');
 Route::get('/getDepartamentsList/{id_country}','DepartamentController@index');
 
 Route::get('/getCitiesList/{id_departament}','CityController@index');
+Route::get('/getCommentsList','CommentsController@index');
